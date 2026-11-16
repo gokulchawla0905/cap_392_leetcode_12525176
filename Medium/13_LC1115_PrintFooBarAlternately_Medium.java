@@ -1,31 +1,32 @@
+
 class FooBar {
     private int n;
-    private boolean fooTurn = true;
+    private boolean flag = true;
 
     public FooBar(int n) {
         this.n = n;
     }
 
-    public synchronized void foo(Runnable printFoo) throws InterruptedException {
+    public synchronized void foo() throws InterruptedException {
         for (int i = 0; i < n; i++) {
-            while (!fooTurn) {
+            while (!flag) {
                 wait();
             }
 
-            printFoo.run();
-            fooTurn = false;
+            System.out.print("foo");
+            flag = false;
             notifyAll();
         }
     }
 
-    public synchronized void bar(Runnable printBar) throws InterruptedException {
+    public synchronized void bar() throws InterruptedException {
         for (int i = 0; i < n; i++) {
-            while (fooTurn) {
+            while (flag) {
                 wait();
             }
 
-            printBar.run();
-            fooTurn = true;
+            System.out.print("bar");
+            flag = true;
             notifyAll();
         }
     }
