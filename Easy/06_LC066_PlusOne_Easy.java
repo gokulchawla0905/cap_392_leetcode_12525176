@@ -1,16 +1,14 @@
 class Solution {
-    public int[] plusOne(int[] digits) {
-        for (int i = digits.length - 1; i >= 0; i--) {
-            if (digits[i] < 9) {
-                digits[i]++;
-                return digits;
-            }
+    public int removeElement(int[] nums, int val) {
+        int k = 0;
 
-            digits[i] = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != val) {
+                nums[k] = nums[i];
+                k++;
+            }
         }
 
-        int[] result = new int[digits.length + 1];
-        result[0] = 1;
-        return result;
+        return k;
     }
 }
